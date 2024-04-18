@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { InventoryContext } from '../Context';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -61,97 +61,103 @@ const UserInventory = () => {
 
     return (
         <>
-            <h1 style={{display: 'flex', justifyContent: 'center', marginTop: '20px'}}>YOUR INVENTORY</h1>
-            <DataRow className='titles' style={{marginTop: '2px'}}>
-                <Col xs={2} style={{display: 'flex', justifyContent: 'end' }}>
-                    <Button onClick ={ () => navigate(`/inventory/add/`)}>
-                        Add New Item
-                    </Button>
-                </Col>
-                <DataCol xs={3}>
-                    <Bold>ITEM NAME</Bold>
-                </DataCol>
-                <DataCol xs={4}>
-                    <Bold>DESCRIPTION</Bold>
-                </DataCol>
-                <DataCol xs={2}>
-                    <Bold>QUANTITY</Bold>
-                </DataCol>
-            </DataRow>
-            {
-                inventory.map((item, index) => {
-                    const editMode = rowToEdit === index;
-                    return (
-                        <DataRow key={index}>
-                            <Col xs={2} style={{display: 'flex', justifyContent: 'end' }}>
-                            { editMode ?
+        { JSON.parse(localStorage.getItem('authorized')) ?
+            <>
+                <h1 style={{display: 'flex', justifyContent: 'center', marginTop: '20px'}}>YOUR INVENTORY</h1>
+                <DataRow className='titles' style={{marginTop: '2px'}}>
+                    <Col xs={2} style={{display: 'flex', justifyContent: 'end' }}>
+                        <Button onClick ={ () => navigate(`/inventory/add/`)}>
+                            Add New Item
+                        </Button>
+                    </Col>
+                    <DataCol xs={3}>
+                        <Bold>ITEM NAME</Bold>
+                    </DataCol>
+                    <DataCol xs={4}>
+                        <Bold>DESCRIPTION</Bold>
+                    </DataCol>
+                    <DataCol xs={2}>
+                        <Bold>QUANTITY</Bold>
+                    </DataCol>
+                </DataRow>
+                {
+                    inventory.map((item, index) => {
+                        const editMode = rowToEdit === index;
+                        return (
+                            <DataRow key={index}>
+                                <Col xs={2} style={{display: 'flex', justifyContent: 'end' }}>
+                                { editMode ?
+                                    <>
+                                        <Button onClick ={(e) => {
+                                            editItem(e);
+                                            toggleEditMode(index);
+                                        }}>
+                                            Submit
+                                        </Button>
+                                        <Button onClick ={() => {
+                                            toggleEditMode(index);
+                                        }}>
+                                            Cancel
+                                        </Button>
+                                    </>
+                                    :
+                                    <>
+                                        <Button onClick ={() => {
+                                            setEditName(item.item_name);
+                                            toggleEditMode(index);
+                                        }}>
+                                            Edit
+                                        </Button>
+                                        <Button onClick ={() => {
+                                            removeItem(item.item_name);
+                                        }}>
+                                            Delete
+                                        </Button>
+                                    </>
+                                }
+                                </Col>
+                                { editMode ?
                                 <>
-                                    <Button onClick ={(e) => {
-                                        editItem(e);
-                                        toggleEditMode(index);
-                                    }}>
-                                        Submit
-                                    </Button>
-                                    <Button onClick ={() => {
-                                        toggleEditMode(index);
-                                    }}>
-                                        Cancel
-                                    </Button>
+                                    <DataCol xs={3}>
+                                        <input style={{width: '100%'}} type='text' placeholder={`${item.item_name}`} onInput={(e) => setItemName(e.target.value)} />
+                                    </DataCol>
+                                    <DataCol xs={4}>
+                                        <input style={{width: '100%'}} type='text' placeholder={`${first100Chars(item.description)}`} onInput={(e) => setDescription(e.target.value)} />
+                                    </DataCol>
+                                    <DataCol xs={2}>
+                                        <input style={{width: '100%'}} type='text' placeholder={`${item.quantity}`} onInput={(e) => setQuantity(e.target.value)} />
+                                    </DataCol>
                                 </>
                                 :
                                 <>
-                                    <Button onClick ={() => {
-                                        setEditName(item.item_name);
-                                        toggleEditMode(index);
+                                    <DataCol xs={3} onClick={() => {
+                                        setSelectedItem(item);
+                                        navigate(`/inventory/view/item/${item.item_name}`);
                                     }}>
-                                        Edit
-                                    </Button>
-                                    <Button onClick ={() => {
-                                        removeItem(item.item_name);
+                                        {item.item_name}
+                                    </DataCol>
+                                    <DataCol xs={4} onClick={() => {
+                                        setSelectedItem(item);
+                                        navigate(`/inventory/view/item/${item.item_name}`);
                                     }}>
-                                        Delete
-                                    </Button>
+                                        {first100Chars(item.description)}
+                                    </DataCol>
+                                    <DataCol xs={2} onClick={() => {
+                                        setSelectedItem(item);
+                                        navigate(`/inventory/view/item/${item.item_name}`);
+                                    }}>
+                                        {item.quantity}
+                                    </DataCol>
                                 </>
-                            }
-                            </Col>
-                            { editMode ?
-                            <>
-                                <DataCol xs={3}>
-                                    <input style={{width: '100%'}} type='text' placeholder={`${item.item_name}`} onInput={(e) => setItemName(e.target.value)} />
-                                </DataCol>
-                                <DataCol xs={4}>
-                                    <input style={{width: '100%'}} type='text' placeholder={`${first100Chars(item.description)}`} onInput={(e) => setDescription(e.target.value)} />
-                                </DataCol>
-                                <DataCol xs={2}>
-                                    <input style={{width: '100%'}} type='text' placeholder={`${item.quantity}`} onInput={(e) => setQuantity(e.target.value)} />
-                                </DataCol>
-                            </>
-                            :
-                            <>
-                                <DataCol xs={3} onClick={() => {
-                                    setSelectedItem(item);
-                                    navigate(`/inventory/view/item/${item.item_name}`);
-                                }}>
-                                    {item.item_name}
-                                </DataCol>
-                                <DataCol xs={4} onClick={() => {
-                                    setSelectedItem(item);
-                                    navigate(`/inventory/view/item/${item.item_name}`);
-                                }}>
-                                    {first100Chars(item.description)}
-                                </DataCol>
-                                <DataCol xs={2} onClick={() => {
-                                    setSelectedItem(item);
-                                    navigate(`/inventory/view/item/${item.item_name}`);
-                                }}>
-                                    {item.quantity}
-                                </DataCol>
-                            </>
-                            }
-                        </DataRow>
-                    )
-                })
-            }
+                                }
+                            </DataRow>
+                        )
+                    })
+                }
+            </>
+            :
+            <h1 style={{display: 'flex', justifyContent: 'center', marginTop: '20px'}}>You must sign in to view your inventory.</h1>
+        }
         </>
     )
 }

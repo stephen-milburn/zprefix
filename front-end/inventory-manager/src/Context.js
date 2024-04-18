@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const InventoryContext = createContext();
 
 const InventoryProvider = ({ children }) => {
+    const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ firstName, setFirstName ] = useState('');
     const [ lastName, setLastName ] = useState('');
@@ -20,7 +21,9 @@ const InventoryProvider = ({ children }) => {
     const handleLoginButton = (e) => {
         e.preventDefault();
         if (localStorage.getItem('isLoggedIn')) {
+            localStorage.clear();
             localStorage.setItem('isLoggedIn', JSON.stringify(false));
+            localStorage.setItem('authorized', JSON.stringify(false));
         }
         navigate('/login')
     }
@@ -88,7 +91,9 @@ const InventoryProvider = ({ children }) => {
 
     return (
         <>
-            <InventoryContext.Provider value = {{password,
+            <InventoryContext.Provider value = {{username,
+                                                 setUsername,
+                                                 password,
                                                  setPassword,
                                                  firstName,
                                                  setFirstName,
@@ -115,7 +120,7 @@ const InventoryProvider = ({ children }) => {
                                                  first100Chars,
                                                  editItem,
                                                  rowToEdit,
-                                                 setRowToEdit
+                                                 setRowToEdit                                                
                                                 }} >
                 { children }
             </InventoryContext.Provider>

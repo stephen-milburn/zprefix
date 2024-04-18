@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { InventoryContext } from '../Context';
 import { useNavigate, Link } from 'react-router-dom';
@@ -67,6 +67,7 @@ const Login = () => {
                 if (res.ok) {
                     localStorage.setItem('username', JSON.stringify(username))
                     localStorage.setItem('isLoggedIn', JSON.stringify(true))
+                    localStorage.setItem('authorized', JSON.stringify(true))
                     navigate(`/inventory/view/user/${username}`)
                 }
             })

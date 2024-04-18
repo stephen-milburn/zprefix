@@ -27,10 +27,10 @@ const Nav = () => {
                 JSON.parse(localStorage.getItem('isLoggedIn')) ?
                 <>
                     <button className="position-relative btn btn-dark btn-sm" onClick={handleYourInventory} style={{marginRight:'20px'}}>
-                        Your Inventory
+                        View Your Inventory
                     </button>
                     <button className="position-relative btn btn-dark btn-sm" onClick={handleAllInventory} style={{marginRight:'20px'}}>
-                        All Inventory
+                        View All Inventory
                     </button>
                     <button className="position-relative btn btn-dark btn-sm" onClick={handleLoginButton} style={{marginRight:'20px'}}>
                         Logout
@@ -39,7 +39,7 @@ const Nav = () => {
                 :
                 <>
                     <button className="position-relative btn btn-dark btn-sm" onClick={handleAllInventory} style={{marginRight:'20px'}}>
-                        All Inventory
+                        View All Inventory
                     </button>
                     <button className="position-relative btn btn-dark btn-sm" onClick={handleLoginButton} style={{marginRight:'20px'}}>
                         Login

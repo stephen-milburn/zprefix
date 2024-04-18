@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { InventoryContext } from '../Context';
 import { useNavigate } from 'react-router-dom';
@@ -75,26 +75,32 @@ const AddInventory = () => {
 
     return (
         <>
-            <h1 style={{display: 'flex', justifyContent: 'center', marginTop: '20px'}}>ADD NEW INVENTORY ITEM</h1>
-            <div style={{height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Wrapper>
-                    <form>
-                        <InputBox>
-                            Item Name:
-                            <Input type='text' placeholder='Item Name' onInput={(e) => setItemName(e.target.value)} required />
-                        </InputBox>
-                        <InputBox>
-                            Description:
-                            <Input type='text' placeholder='Description' onInput={(e) => setDescription(e.target.value)} required />
-                        </InputBox>
-                        <InputBox>
-                            Quantity
-                            <Input type='number' placeholder='Quantity' onInput={(e) => setQuantity(e.target.value)} required />
-                        </InputBox>
-                        <SubmitButton type='submit' onClick={addItem}>Add Item</SubmitButton>
-                    </form>
-                </Wrapper>
-            </div>
+        { JSON.parse(localStorage.getItem('authorized')) ?
+            <>
+                <h1 style={{display: 'flex', justifyContent: 'center', marginTop: '20px'}}>ADD NEW INVENTORY ITEM</h1>
+                <div style={{height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Wrapper>
+                        <form>
+                            <InputBox>
+                                Item Name:
+                                <Input type='text' placeholder='Item Name' onInput={(e) => setItemName(e.target.value)} required />
+                            </InputBox>
+                            <InputBox>
+                                Description:
+                                <Input type='text' placeholder='Description' onInput={(e) => setDescription(e.target.value)} required />
+                            </InputBox>
+                            <InputBox>
+                                Quantity
+                                <Input type='number' placeholder='Quantity' onInput={(e) => setQuantity(e.target.value)} required />
+                            </InputBox>
+                            <SubmitButton type='submit' onClick={addItem}>Add Item</SubmitButton>
+                        </form>
+                    </Wrapper>
+                </div>
+            </>
+            :
+            <h1 style={{display: 'flex', justifyContent: 'center', marginTop: '20px'}}>You must sign in to add inventory.</h1>
+        }
         </>
     )
 }
