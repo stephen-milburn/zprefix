@@ -94,7 +94,7 @@ const Signup = () => {
                     </InputBox>
                     <InputBox>
                         Username:
-                        <Input type='text' placeholder='Username' pattern="^[a-zA-Z0-9_-]+$" onInput={(e) => setUsername(e.target.value)} required />
+                        <Input type='text' placeholder='Username' onInput={(e) => setUsername(e.target.value)} required />
                     </InputBox>
                     <InputBox>
                         Password:
