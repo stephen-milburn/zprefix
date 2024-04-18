@@ -1,31 +1,58 @@
-Stories
-[X] As an inventory manager I want to be able to create an account so that I can track my inventory.
+WELCOME TO MANAGER INVENTORY MANAGER
 
-[X] As an inventory manager I want to be able to log into my account so that I can see my inventory of items.
-After logging in, the inventory manager should be redirected to their inventory of items.
+An elegant solution to managing inventory.
 
-[X] As an inventory manager I want to be able to create a new item so that I can share my item details with the world.
-After the item is created, the inventory manager should be redirected to their inventory of items.
-An item displays name, description, and quantity.
+Installation:
+1. cd into front-end/inventory-manager
+2. terminal: npm install
+3. terminal: npm start
+4. cd into back-end
+5. terminal: npm install
+6. Create a postgres databse called "zdb"
+7. terminal: docker compose up --build
+8. terminal: npm run migrate
+9. terminal: npm run seed
 
-[X] As an inventory manager I want to be able to see a my entire inventory of items.
-The inventory of items should display the first 100 characters of each item description, with “...” at the end if the description is longer than 100 characters.
+Teardown:
+1. Access terminal where docker compose up --build is running.
+2. terminal: CTRL+C
+3. terminal: docker compose down
 
-[X] As an inventory manager I want to be able to see any individual item I have added.
-The full item information should be displayed.
+Utilization:
 
-[ ] As an inventory manager I want to be able to edit an item so that I can fix any mistakes I made creating it. 
-When the user toggles edit mode, the page remains the same and the fields become editable.
+--- VISITORS ---
+You will not have access to add, edit, or delete items.
+You can click on the View All Inventory button on the nav bar to pull our items.
+You can drill down to a specific item by clicking on its row.
 
-[X] As an inventory manager I want to be able to delete an item so that I can remove any unwanted content.
-When the user deletes the item they should be redirected to their inventory of items.
+--- MANAGERS ---
+When accessing the application, you will be redirected to the login screen.
+As a new user, you will need to create a new account.
+Otherwise, you can use the following credentials to login:
+- Username: Manager1 
+- Password: password
 
-[X] As a visitor, who is not logged in, I want to be able to view all items created by every inventory manager so that I can browse every item.
-Unauthenticated users should be able to view all items, and any single item.
-The items should only display the first 100 characters of its description with “...” at the end if it is longer than 100 characters.
+Upon signing up or loggin in, you will be redirected to your inventory page.
+NAVBAR (functionality listed as seen from left to right)
+Click on the View Your Inventory button to pull only inventory posted by you.
+Click on the View All Inventory button to pull all inventory.
+You will see a welcome message containing your username.
+Click on the Logout button to logout and be redirected to the login page.
 
-[X] As a visitor, who is not logged in, I want to be able to view a specific item created by any user so that I can see all of its details.
-Unauthenticated users should be able to view all items, and any single item.
+As a new user, you will not have any items in your inventory.
+As Manager1, you will see multiple items pull.
 
-[X] As an inventory manager I want to be able to view all items created by every inventory manager so that I can browse every item.
-Unauthenticated users should be able to view all items, and any single item.
+Use the Add Item button to add inventory.
+Upon adding inventory, you will be redirected back to your inventory.
+
+Each item has an associated Edit and Delete button.
+Edit will make the fields editable. When you hit Submit, it will update the fields for that item.
+Delete will remove the item from inventory.
+
+To view a specific item, click on the row that holds the item's information.
+This redirects you to the item page. 
+
+Testing:
+Console Logs to test the functionality of my React App.
+Postman to test the functionality of my API.
+PostgreSQL VS Code extension to test changes to the DB.
