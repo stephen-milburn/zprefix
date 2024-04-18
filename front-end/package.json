@@ -1,11 +1,14 @@
 {
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/lab": "^4.0.0-alpha.61",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "react-router-dom": "^6.22.3"
   },
   "name": "front-end",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

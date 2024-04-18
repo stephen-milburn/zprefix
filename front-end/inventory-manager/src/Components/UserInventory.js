@@ -45,7 +45,7 @@ const UserInventory = () => {
             rowToEdit,
             setRowToEdit } = useContext(InventoryContext);
     const navigate = useNavigate();
-
+    
     const toggleEditMode = (rowId) => {
         setRowToEdit(prevRowId => prevRowId === rowId ? null : rowId)
     }

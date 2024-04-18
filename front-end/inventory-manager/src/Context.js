@@ -20,10 +20,11 @@ const InventoryProvider = ({ children }) => {
 
     const handleLoginButton = (e) => {
         e.preventDefault();
-        if (localStorage.getItem('isLoggedIn')) {
-            localStorage.clear();
+        if (JSON.parse(localStorage.getItem('isLoggedIn'))) {
+            localStorage.removeItem('username');
             localStorage.setItem('isLoggedIn', JSON.stringify(false));
             localStorage.setItem('authorized', JSON.stringify(false));
+            alert(`Logged out. Redirecting to Login screen....`)
         }
         navigate('/login')
     }
@@ -62,6 +63,7 @@ const InventoryProvider = ({ children }) => {
             })
                 .then(res => {
                     if (res.ok) navigate(`/inventory/view/user/${user}`)
+                    alert(`Edited ${itemName}. Redirecting to your inventory....`)
                 })
         }
     }
@@ -78,6 +80,7 @@ const InventoryProvider = ({ children }) => {
                 if (res.ok) {
                     console.log('Item removed.')
                     navigate(`/inventory/view/user/${user}`);
+                    alert(`Removed ${itemName}. Redirecting to your inventory....`)
                 }
                 else console.error(`Failed to remove item ${itemName}`)
             })

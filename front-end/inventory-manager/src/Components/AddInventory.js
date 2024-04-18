@@ -69,6 +69,7 @@ const AddInventory = () => {
             })
                 .then(res => {
                     if (res.ok) navigate(`/inventory/view/user/${user}`)
+                    alert(`Added ${itemName} to inventory. Redirecting to your inventory....`)
                 })
         }
     }

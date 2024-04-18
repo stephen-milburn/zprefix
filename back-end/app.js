@@ -1,36 +1,38 @@
 const express = require('express');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
 const app = express();
 const knex = require('knex')(require('./knexfile.js')['development'])
 const PORT = 8080;
 
 app.use(cors(), express.json());
 
-// create an account
+// create an account (done)
 app.post('/signup', (req, res) => {
     const { first_name, last_name, username, password } = req.body;
-    knex('users')
-        .insert({ first_name, last_name, username, password })
-        .then(posted => {
-            if (posted) res.status(201).json({ first_name, last_name, username, password })
+    bcrypt.hash(password, 10)
+        .then(encryptedPass => {
+        return knex('users')
+            .insert({ first_name, last_name, username, password: encryptedPass })
         })
+            .then(posted => {
+                if (posted) res.status(201).json({ first_name, last_name, username, password })
+            })
 })
 
-// log in account
+// log in account (done)
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
     knex('users')
         .where('username', username)
         .then(user => {
             if (user.length === 0) res.status(404).send('Incorrect credentials.')
-            else { 
-            knex('users')
-                .where('password', password)
-                .then(pass => {
-                    if (pass.length === 0) res.status(404).send('Incorrect credentials.')
-                    else res.status(200).send('Login successful. Rerouting to Inventory...')
-                })
-        }})
+            else {
+                let isEqual = bcrypt.compare(password, user[0].password)
+                if (isEqual) res.status(200).send('Login successful. Redirecting to your inventory....');
+                else res.status(404).send('Incorrect credentials. Please try again.');
+            }
+        })
 })
 
 // redirected after logging in (done)
@@ -95,7 +97,6 @@ app.delete('/inventory/delete/:item_name', (req, res) => {
             if (deleted) res.status(202).json(`Item ${item_name} deleted.`)
             else res.status(404).json(`Item ${item_name} not found.`)
         })
-        // .catch(err => res.status(500).send(err));
 })
 
 // visitor views all inventory items (done)

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { InventoryContext } from '../Context';
 import { useNavigate, Link } from 'react-router-dom';
+import bcrypt from 'bcryptjs';
 
 const Wrapper = styled.div`
     width: 420px;
@@ -59,13 +60,14 @@ const Signup = () => {
     const navigate = useNavigate();
 
     const signup = (e) => {
+        let signedUp = false;
         e.preventDefault();
         fetch('http://localhost:8080/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ first_name: firstName, last_name: lastName, username, password })
+            body: JSON.stringify({ first_name: firstName, last_name: lastName, username, password: bcrypt.hashSync(password, 10) })
         })
             .then(res => {
                 if (res.ok) {
@@ -73,6 +75,7 @@ const Signup = () => {
                     localStorage.setItem('isLoggedIn', JSON.stringify(true))
                     localStorage.setItem('authorized', JSON.stringify(true))
                     navigate(`/inventory/view/user/${username}`)
+                    alert(`Logged in as ${username}. Redirecting to your inventory....`)
                 }
             })
     }

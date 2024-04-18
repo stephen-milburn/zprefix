@@ -6,7 +6,7 @@ const Nav = () => {
     const { handleLoginButton,
             handleYourInventory,
             handleAllInventory } = useContext(InventoryContext)
-
+    let user = JSON.parse(localStorage.getItem('username'));
     return (
         <header>
             <link
@@ -14,10 +14,10 @@ const Nav = () => {
             rel="icon"
             />
             <nav className="navbar navbar-dark bg-dark justify-content-between p-2">
-            <a className="navbar-brand mb-0 h1" href="#">
+            <span className="navbar-brand mb-0 h1">
                 <img src='https://snipboard.io/3qgB6v.jpg' alt='MIM Logo' style={{width: '50px', height: '50px', padding: '5px'}}/>
                 Manager Inventory Manager
-            </a>
+            </span>
             <form
                 style={{display: 'inline-block'}}
                 id="logout"
@@ -31,6 +31,9 @@ const Nav = () => {
                     </button>
                     <button className="position-relative btn btn-dark btn-sm" onClick={handleAllInventory} style={{marginRight:'20px'}}>
                         View All Inventory
+                    </button>
+                    <button className="position-relative btn btn-dark btn-sm" disabled={true} style={{marginRight:'20px'}}>
+                        Welcome, {user}!
                     </button>
                     <button className="position-relative btn btn-dark btn-sm" onClick={handleLoginButton} style={{marginRight:'20px'}}>
                         Logout

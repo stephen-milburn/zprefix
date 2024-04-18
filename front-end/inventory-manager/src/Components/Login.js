@@ -69,6 +69,7 @@ const Login = () => {
                     localStorage.setItem('isLoggedIn', JSON.stringify(true))
                     localStorage.setItem('authorized', JSON.stringify(true))
                     navigate(`/inventory/view/user/${username}`)
+                    alert(`Logged in as ${username}. Redirecting to your inventory....`)
                 }
             })
     }
