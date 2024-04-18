@@ -1,0 +1,23 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "NODE_ENV=development node app.js",
+    "rollback": "NODE_ENV=seeding npx knex migrate:rollback",
+    "createMigrate": "NODE_ENV=seeding npx knex migrate:make",
+    "migrate": "NODE_ENV=seeding npx knex migrate:latest",
+    "createSeed": "NODE_ENV=seeding npx knex seed:make",
+    "seed": "NODE_ENV=seeding npx knex seed:run"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "knex": "^3.1.0",
+    "node": "^18.20.2",
+    "pg": "^8.11.5"
+  }
+}

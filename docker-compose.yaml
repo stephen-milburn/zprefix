@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  zapi:
+    build: back-end
+    depends_on:
+      - zdb
+    ports:
+      - "8080:8080"
+  zdb:
+    image: postgres:latest
+    environment:
+      - DATABASE_HOST=zdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+    ports: 
+      - "5432:5432"
