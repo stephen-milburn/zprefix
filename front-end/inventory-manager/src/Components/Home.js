@@ -1,13 +1,10 @@
 import React, { useContext } from 'react';
-import { InventoryContext } from '../Context';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Col } from 'react-bootstrap'
 
 const Home = () => {
-    const { } = useContext(InventoryContext);
-
     const Button = styled.button`
     display: flex;
     justify-content: center;
@@ -40,11 +37,11 @@ const Home = () => {
                         </Row>
                     </Col>
                     <Col xs={6} className='text-center'>
-                        <h2>View All Inventory!</h2>
+                        <h2>All Inventory</h2>
                         <Row>
                             <Col xs={12} style={{display: 'flex', justifyContent: 'center' }}>
                                 <Button onClick ={() => navigate(`/inventory/view`)}>
-                                    All Inventory
+                                    View All Inventory
                                 </Button>
                             </Col>
                         </Row>
