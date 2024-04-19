@@ -24,9 +24,10 @@ const InventoryProvider = ({ children }) => {
             localStorage.removeItem('username');
             localStorage.setItem('isLoggedIn', JSON.stringify(false));
             localStorage.setItem('authorized', JSON.stringify(false));
-            alert(`Logged out. Redirecting to Login screen....`)
+            alert(`Logged out. Redirecting to Homepage....`)
+            navigate('/')
         }
-        navigate('/login')
+        else navigate('/login')
     }
 
     const handleAdd = (e) => {
@@ -43,6 +44,11 @@ const InventoryProvider = ({ children }) => {
     const handleAllInventory = (e) => {
         e.preventDefault();
         navigate('/inventory/view');
+    }
+
+    const handleHome = (e) => {
+        e.preventDefault();
+        navigate('/');
     }
 
     const handleEdit = (e) => {
@@ -119,6 +125,7 @@ const InventoryProvider = ({ children }) => {
                                                  handleEdit,
                                                  handleYourInventory,
                                                  handleAllInventory,
+                                                 handleHome,
                                                  removeItem,
                                                  first100Chars,
                                                  editItem,

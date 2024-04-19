@@ -5,7 +5,8 @@ import { InventoryContext } from '../Context';
 const Nav = () => {
     const { handleLoginButton,
             handleYourInventory,
-            handleAllInventory } = useContext(InventoryContext)
+            handleAllInventory,
+            handleHome } = useContext(InventoryContext)
     let user = JSON.parse(localStorage.getItem('username'));
     return (
         <header>
@@ -26,6 +27,9 @@ const Nav = () => {
             {
                 JSON.parse(localStorage.getItem('isLoggedIn')) ?
                 <>
+                    <button className="position-relative btn btn-dark btn-sm" onClick={handleHome} style={{marginRight:'20px'}}>
+                        Home
+                    </button>
                     <button className="position-relative btn btn-dark btn-sm" onClick={handleYourInventory} style={{marginRight:'20px'}}>
                         View Your Inventory
                     </button>
@@ -41,6 +45,9 @@ const Nav = () => {
                 </>
                 :
                 <>
+                    <button className="position-relative btn btn-dark btn-sm" onClick={handleHome} style={{marginRight:'20px'}}>
+                        Home
+                    </button>
                     <button className="position-relative btn btn-dark btn-sm" onClick={handleAllInventory} style={{marginRight:'20px'}}>
                         View All Inventory
                     </button>

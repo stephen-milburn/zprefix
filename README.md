@@ -25,6 +25,11 @@ Teardown:
 
 Utilization:
 
+--- HOMEPAGE ---
+You can choose:
+- to be a visitor and simply view our inventory.
+- to be a manager and login or signup.
+
 --- VISITORS ---
 You will not have access to add, edit, or delete items.
 You can click on the View All Inventory button on the nav bar to pull our items.
@@ -39,6 +44,7 @@ Otherwise, you can use the following credentials to login:
 
 Upon signing up or loggin in, you will be redirected to your inventory page.
 NAVBAR (functionality listed as seen from left to right)
+Click on the Home button to revisit our Homepage.
 Click on the View Your Inventory button to pull only inventory posted by you.
 Click on the View All Inventory button to pull all inventory.
 You will see a welcome message containing your username.

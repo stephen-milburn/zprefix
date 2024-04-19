@@ -8,10 +8,6 @@ import { Row, Col } from 'react-bootstrap'
 const Home = () => {
     const { } = useContext(InventoryContext);
 
-    const Bold = styled.h2`
-    font-weight: bold;
-    `
-
     const Button = styled.button`
     display: flex;
     justify-content: center;
@@ -25,34 +21,66 @@ const Home = () => {
 
     const navigate = useNavigate();
 
+    let user = JSON.parse(localStorage.getItem('username'));
+
     return(
-        <Row className='justify-content-center align-items-center py-5'>
-            <Col xs={6} className='text-center'>
-                <Bold>Visitor? View Our Inventory!</Bold>
-                <Row>
-                    <Col xs={12} style={{display: 'flex', justifyContent: 'center' }}>
-                        <Button onClick ={() => navigate(`/inventory/view`)}>
-                            View Inventory
-                        </Button>
+        <>
+        { JSON.parse(localStorage.getItem('authorized')) ?
+            <>
+                <h1 className='text-center py-5'>Welcome to Manager Inventory Manager, {user}!</h1>
+                <Row className='justify-content-center align-items-center py-5'>
+                    <Col xs={6} className='text-center'>
+                        <h2>Your Inventory</h2>
+                        <Row>
+                            <Col xs={12} style={{display: 'flex', justifyContent: 'center' }}>
+                                <Button onClick ={() => navigate(`/inventory/view/user/${user}`)}>
+                                    View Your Inventory
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col xs={6} className='text-center'>
+                        <h2>View All Inventory!</h2>
+                        <Row>
+                            <Col xs={12} style={{display: 'flex', justifyContent: 'center' }}>
+                                <Button onClick ={() => navigate(`/inventory/view`)}>
+                                    All Inventory
+                                </Button>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
-            </Col>
-            <Col xs={6} className='text-center'>
-                <Bold>Manager? Signup or Login!</Bold>
-                <Row>
-                    <Col xs={6} style={{display: 'flex', justifyContent: 'center' }}>
-                        <Button onClick ={() => navigate(`/signup`)}>
-                            Signup
-                        </Button>
-                    </Col>
-                    <Col xs={6} style={{display: 'flex', justifyContent: 'center' }}>
-                        <Button onClick ={() => navigate(`/login`)}>
-                            Login
-                        </Button>
-                    </Col>
-                </Row>
-            </Col>
-        </Row>
+            </>
+            :
+            <Row className='justify-content-center align-items-center py-5'>
+                <Col xs={6} className='text-center'>
+                    <h2>Visitor? View Our Inventory!</h2>
+                    <Row>
+                        <Col xs={12} style={{display: 'flex', justifyContent: 'center' }}>
+                            <Button onClick ={() => navigate(`/inventory/view`)}>
+                                View Inventory
+                            </Button>
+                        </Col>
+                    </Row>
+                </Col>
+                <Col xs={6} className='text-center'>
+                    <h2>Manager? Signup or Login!</h2>
+                    <Row>
+                        <Col xs={6} style={{display: 'flex', justifyContent: 'center' }}>
+                            <Button onClick ={() => navigate(`/signup`)}>
+                                Signup
+                            </Button>
+                        </Col>
+                        <Col xs={6} style={{display: 'flex', justifyContent: 'center' }}>
+                            <Button onClick ={() => navigate(`/login`)}>
+                                Login
+                            </Button>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+        }
+        </>
     )
 }
 
