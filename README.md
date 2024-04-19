@@ -3,20 +3,25 @@ WELCOME TO MANAGER INVENTORY MANAGER
 An elegant solution to managing inventory.
 
 Installation:
-1. cd into front-end/inventory-manager
-2. terminal: npm install
-3. terminal: npm start
-4. cd into back-end
-5. terminal: npm install
-6. Create a postgres databse called "zdb"
-7. terminal: docker compose up --build
-8. terminal: npm run migrate
-9. terminal: npm run seed
+1. cd into back-end
+2. terminal1: docker compose up --build
+3. terminal2: docker ps -a
+4. Find the postgres:latest container ID.
+5. terminal2: docker exec -it (container ID) bash
+6. terminal2: psql -U postgres
+7. terminal2: CREATE DATABASE zdb;
+8. terminal3: cd into back-end
+9. terminal3: npm install
+10. terminal3: npm run migrate
+11. terminal3: npm run seed
+12. terminal4: cd into front-end/inventory-manager
+13. terminal4: npm install
+14. terminal4: npm start
 
 Teardown:
-1. Access terminal where docker compose up --build is running.
-2. terminal: CTRL+C
-3. terminal: docker compose down
+1. terminal1: CTRL+C
+2. terminal1: docker compose down
+3. terminal4: CTRL+C
 
 Utilization:
 

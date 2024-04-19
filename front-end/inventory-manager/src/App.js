@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { InventoryProvider } from './Context';
 import Nav from './Components/Nav';
+import Home from './Components/Home';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import ViewInventory from './Components/ViewInventory';
@@ -14,6 +15,7 @@ function App() {
       <InventoryProvider>
         <Nav />
         <Routes>
+          <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/inventory/view' element={<ViewInventory />} />

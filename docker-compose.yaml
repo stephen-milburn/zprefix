@@ -13,5 +13,5 @@ services:
       - DATABASE_HOST=zdb
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
-    ports: 
+    ports:
       - "5432:5432"
